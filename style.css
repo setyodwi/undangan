@@ -1014,3 +1014,13 @@ body:not(.opened) .dock { transform: translate(-50%, 100px); opacity: 0; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   [data-reveal] { opacity: 1; transform: none; }
 }
+
+
+/* Nama tamu personal */
+.cover__guest-welcome {
+  margin-top: 8px;
+  font-size: .68rem;
+  letter-spacing: .08em;
+  color: rgba(255,244,235,.85);
+  max-width: 260px;
+}

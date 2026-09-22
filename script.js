@@ -100,6 +100,12 @@ function initGuestName() {
   const name = getGuestName();
   const el = $("#guest-name");
   if (el) el.textContent = name || "Tamu Undangan";
+  const welcome = $("#guest-welcome");
+  if (welcome) {
+    welcome.textContent = name
+      ? `Dengan penuh kebahagiaan, kami mengundang ${name} untuk hadir di hari istimewa kami.`
+      : "Dengan penuh kebahagiaan kami mengundang Anda untuk hadir.";
+  }
   const input = $("#f-nama");
   if (input && name) input.value = name;
 }

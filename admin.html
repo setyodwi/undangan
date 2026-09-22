@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Kirim Undangan WA</title>
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+<style>
+body{font-family:Arial,sans-serif;max-width:700px;margin:30px auto;padding:20px;background:#fff8f3;color:#4b3a3e}
+input,button{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px solid #ccc}
+button{background:#c9a24b;color:white;border:0;cursor:pointer}.card{background:white;padding:15px;border-radius:12px;margin:10px 0}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+</style>
+</head>
+<body>
+<h1>Admin Undangan</h1>
+<p>Upload template Excel atau tambah tamu manual.</p>
+
+<input type="file" id="excel" accept=".xlsx,.xls" onchange="uploadExcel(event)">
+<small>Format Excel: kolom <b>nama</b> dan <b>wa</b></small>
+
+<div class="row">
+<input id="nama" placeholder="Nama tamu">
+<input id="wa" placeholder="628xxxxxxxxxx">
+</div>
+<button onclick="tambah()">Tambah Tamu</button>
+<button onclick="bulk()">Kirim Semua WA</button>
+<button onclick="hapus()">Hapus Semua Data</button>
+
+<div id="list"></div>
+
+<script>
+const KEY="daftar-tamu-undangan";
+function data(){return JSON.parse(localStorage.getItem(KEY)||"[]")}
+function save(x){localStorage.setItem(KEY,JSON.stringify(x));render()}
+
+function uploadExcel(e){
+ const file=e.target.files[0];
+ if(!file)return;
+ const reader=new FileReader();
+ reader.onload=function(ev){
+  const wb=XLSX.read(ev.target.result,{type:'binary'});
+  const rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+  let old=data();
+  rows.forEach(r=>{
+    let nama=r.nama||r.Nama||r.NAMA;
+    let wa=r.wa||r.WA||r.Whatsapp||r.whatsapp;
+    if(nama&&wa) old.push({nama:String(nama),wa:String(wa).replace(/[^0-9]/g,'')});
+  });
+  save(old);
+  alert('Data tamu berhasil diimport');
+ };
+ reader.readAsBinaryString(file);
+}
+
+function tambah(){let n=nama.value.trim(),w=wa.value.trim();if(!n||!w)return alert('Isi nama dan nomor WA');let a=data();a.push({nama:n,wa:w});save(a)}
+function link(n){return 'https://undangan-jet-eta.vercel.app/?to='+encodeURIComponent(n)}
+function pesan(t){return `Assalamu'alaikum ${t.nama},\n\nDengan penuh kebahagiaan kami mengundang Bapak/Ibu/Saudara/i untuk hadir di acara pernikahan kami.\n\nBuka undangan:\n${link(t.nama)}\n\nTerima kasih 🙏`;}
+function kirim(t){window.open('https://wa.me/'+t.wa+'?text='+encodeURIComponent(pesan(t)),'_blank')}
+function bulk(){data().forEach((t,i)=>setTimeout(()=>kirim(t),i*2000))}
+function hapus(){localStorage.removeItem(KEY);render()}
+function render(){list.innerHTML=data().map(t=>`<div class="card"><b>${t.nama}</b><br>${t.wa}<button onclick='kirim(${JSON.stringify(t)})'>Kirim WA</button></div>`).join('')}
+render();
+</script>
+</body>
+</html>
