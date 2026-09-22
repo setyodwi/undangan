@@ -12,11 +12,11 @@
 const CONFIG = {
   // Nomor rekening & e-wallet (SAAT INI MASIH CONTOH — ganti dengan yang asli!)
   bankAccounts: [
-    { brand: "Bank BCA",    type: "Transfer Bank",  number: "1234567890",    holder: "Dian Ayu Puspa Sari" },
+    { brand: "Bank BCA", type: "Transfer Bank", number: "1234567890", holder: "Dian Ayu Puspa Sari" },
     { brand: "Bank Mandiri", type: "Transfer Bank", number: "1230007890123", holder: "Iqbal Pradana" },
   ],
   ewallets: [
-    { brand: "DANA",  type: "E-Wallet", number: "0812-xxxx-xxxx", holder: "Dian Ayu Puspa Sari" },
+    { brand: "DANA", type: "E-Wallet", number: "0812-xxxx-xxxx", holder: "Dian Ayu Puspa Sari" },
     { brand: "GoPay", type: "E-Wallet", number: "0812-xxxx-xxxx", holder: "Iqbal Pradana" },
   ],
   // Alamat pengiriman kado fisik
@@ -31,16 +31,16 @@ const CONFIG = {
   rsvpWebAppUrl: "",
 
   // Lagu latar: MAHALINI X NUCA — JANJI KITA (via YouTube)
-  youtubeVideoId: "In8kDy_WU4s",
+  youtubeVideoId: "5DG2wjyte-w",
 
   // Tanggal & waktu akad (WIB) — dipakai countdown & kalender
-  weddingDateISO: "2027-01-10T08:00:00+07:00",
+  weddingDateISO: "2026-12-20T08:00:00+07:00",
 };
 
 /* --------------------------------------------------------------------------
    Utilitas
    -------------------------------------------------------------------------- */
-const $  = (sel, ctx = document) => ctx.querySelector(sel);
+const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 const pad = (n) => String(n).padStart(2, "0");
 
