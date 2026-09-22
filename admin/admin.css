@@ -1,40 +1,56 @@
 body{
-font-family:Arial;
-background:#f6f1ee;
+font-family:Arial,sans-serif;
+background:#f5efeb;
+margin:0;
 padding:20px;
+color:#333
 }
-
-.box,section{
+.login-card,.card{
 background:white;
-padding:20px;
-border-radius:15px;
+border-radius:16px;
+padding:24px;
 margin-bottom:20px;
+box-shadow:0 5px 20px #0001
 }
-
+.login-card{max-width:350px;margin:80px auto}
 input,button{
 padding:10px;
 margin:5px;
+border-radius:8px;
+border:1px solid #ddd
 }
-
 button{
 cursor:pointer;
+background:#b8954b;
+color:white;
+border:none
 }
-
-.hide{
-display:none;
+header{
+display:flex;
+justify-content:space-between;
+align-items:center
 }
-
+nav{
+display:flex;
+gap:10px;
+margin:20px 0
+}
+.tab{}
+.hidden{display:none}
 table{
 width:100%;
-border-collapse:collapse;
+border-collapse:collapse
 }
-
-td,th{
-border:1px solid #ddd;
-padding:8px;
+th,td{
+padding:12px;
+border-bottom:1px solid #ddd
 }
-
-.card{
-padding:10px;
-border-bottom:1px solid #ddd;
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+gap:15px
+}
+.grid img{
+width:100%;
+border-radius:12px
 }

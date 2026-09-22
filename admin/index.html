@@ -1,59 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin Zentih</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zentih Admin</title>
 <link rel="stylesheet" href="admin.css">
 </head>
 <body>
 
-<div id="login" class="box">
-<h2>Admin Undangan</h2>
-<input id="user" placeholder="Username">
-<input id="pass" type="password" placeholder="Password">
+<div id="loginCard" class="login-card">
+<h2>Zentih Admin</h2>
+<input id="username" placeholder="Username">
+<input id="password" type="password" placeholder="Password">
 <button onclick="login()">Masuk</button>
 </div>
 
-<div id="app" class="hide">
+<div id="dashboard" class="hidden">
 
-<h1>Dashboard Undangan</h1>
+<header>
+<h1>Zentih Admin</h1>
 <button onclick="logout()">Logout</button>
+</header>
 
-<section>
+<nav>
+<button onclick="showTab('tamu')">👥 Tamu</button>
+<button onclick="showTab('gallery')">🖼 Gallery</button>
+<button onclick="showTab('ucapan')">💌 Ucapan</button>
+</nav>
+
+<main>
+
+<section id="tamu" class="tab">
+<div class="card">
 <h2>Tambah Tamu</h2>
 <input id="nama" placeholder="Nama tamu">
-<input id="wa" placeholder="Nomor WhatsApp">
+<input id="wa" placeholder="628xxxx">
 <button onclick="addTamu()">Tambah</button>
+</div>
 
-<h3>Upload Excel</h3>
-<input type="file" id="excel">
-<button onclick="importExcel()">Import</button>
-</section>
-
-<section>
+<div class="card">
 <h2>Daftar Tamu</h2>
 <button onclick="loadTamu()">Refresh</button>
 <table>
 <thead><tr><th>Nama</th><th>WA</th><th>Aksi</th></tr></thead>
-<tbody id="tamu"></tbody>
+<tbody id="tamuList"></tbody>
 </table>
 <button onclick="bulkWA()">Bulk WA</button>
+</div>
 </section>
 
-<section>
-<h2>Gallery</h2>
+<section id="gallery" class="tab hidden">
+<div class="card">
+<h2>Upload Gallery</h2>
 <input type="file" id="foto" multiple>
-<button onclick="uploadFoto()">Upload Foto</button>
-<div id="gallery"></div>
+<button onclick="uploadFoto()">Upload</button>
+</div>
+<div class="grid" id="galleryList"></div>
 </section>
 
-<section>
+<section id="ucapan" class="tab hidden">
+<div class="card">
 <h2>Ucapan</h2>
 <button onclick="loadUcapan()">Refresh</button>
-<div id="ucapan"></div>
+<div id="ucapanList"></div>
+</div>
 </section>
 
+</main>
 </div>
 
 <script src="admin.js"></script>

@@ -1,31 +1,29 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbzmjg_e2MHgeVYd7ehJH_3QFykCIJ-T78LcE44nopBjS30xwdJ95P4H-2EKX6qlglFd/exec";
-
-const USER = "boncel";
-const PASS = "Annisa2000_";
+const API_URL = "https://script.google.com/macros/s/AKfycbwXBg8fYPIAuRfcfdWUjds01MAJwVNINUXb9NKKzMmD6Ny7opiVqwWFqL2ZxwqMrixH/exec";
 
 let tamu = [];
 
 function login() {
-  if (user.value === USER && pass.value === PASS) {
-    localStorage.admin = "1";
-    buka();
+  if (username.value === "boncel" && password.value === "Annisa2000_") {
+    localStorage.admin = "yes";
+    openAdmin();
   } else alert("Login gagal");
 }
 
-function buka() {
-  loginBox = document.getElementById("login");
-  app = document.getElementById("app");
-  loginBox.classList.add("hide");
-  app.classList.remove("hide");
+function openAdmin() {
+  loginCard.classList.add("hidden");
+  dashboard.classList.remove("hidden");
   loadTamu();
-  loadUcapan();
 }
 
-if (localStorage.admin) buka();
+if (localStorage.admin) openAdmin();
 
-function logout() {
-  localStorage.clear();
-  location.reload();
+function logout() { localStorage.clear(); location.reload() }
+
+function showTab(id) {
+  document.querySelectorAll(".tab").forEach(x => x.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+  if (id === "gallery") loadGallery();
+  if (id === "ucapan") loadUcapan();
 }
 
 async function api(action) {
@@ -35,20 +33,17 @@ async function api(action) {
 
 async function loadTamu() {
   tamu = await api("tamu");
-  document.getElementById("tamu").innerHTML = tamu.map(x => `
- <tr>
- <td>${x.nama}</td>
- <td>${x.wa}</td>
- <td>
- <button onclick="wa('${x.wa}','${x.nama}')">WA</button>
- </td>
- </tr>`).join("");
+  tamuList.innerHTML = tamu.map(x => `
+<tr>
+<td>${x.nama || ""}</td>
+<td>${x.wa || ""}</td>
+<td><button onclick="sendWA('${x.wa}','${x.nama}')">WA</button></td>
+</tr>`).join("");
 }
 
 async function addTamu() {
   await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
+    method: "POST", body: JSON.stringify({
       action: "addTamu",
       nama: nama.value,
       wa: wa.value
@@ -57,31 +52,41 @@ async function addTamu() {
   loadTamu();
 }
 
-function wa(no, nama) {
-  let text = `Undangan Pernikahan Nisa & Setyo\nhttps://www.zentih.my.id/?to=${encodeURIComponent(nama)}`;
-  window.open("https://wa.me/" + no + "?text=" + encodeURIComponent(text));
+function sendWA(no, nama) {
+  window.open("https://wa.me/" + no + "?text=" + encodeURIComponent(
+    "Undangan Pernikahan Nisa & Setyo\nhttps://www.zentih.my.id/?to=" + nama
+  ));
 }
 
 function bulkWA() {
-  tamu.forEach((x, i) => {
-    setTimeout(() => wa(x.wa, x.nama), i * 3000);
-  });
+  tamu.forEach((x, i) => setTimeout(() => sendWA(x.wa, x.nama), i * 3000));
+}
+
+async function loadGallery() {
+  let data = await api("gallery");
+  galleryList.innerHTML = data.map(x => `<img src="${x.url}">`).join("");
+}
+
+async function uploadFoto() {
+  let files = foto.files;
+  for (let f of files) {
+    let reader = new FileReader();
+    reader.onload = async () => {
+      await fetch(API_URL, {
+        method: "POST", body: JSON.stringify({
+          action: "uploadGallery",
+          file: reader.result.split(",")[1],
+          name: f.name
+        })
+      });
+    };
+    reader.readAsDataURL(f);
+  }
+  alert("Upload diproses");
 }
 
 async function loadUcapan() {
   let data = await api("ucapan");
-  ucapan.innerHTML = data.map(x => `
- <div class="card"><b>${x.nama}</b><br>${x.pesan}</div>
- `).join("");
-}
-
-async function uploadFoto() {
-  let files = document.getElementById("foto").files;
-  for (let f of files) {
-    alert("Upload " + f.name + " membutuhkan endpoint uploadGallery di Apps Script");
-  }
-}
-
-function importExcel() {
-  alert("Import Excel membutuhkan endpoint importExcel di Apps Script");
+  ucapanList.innerHTML = data.map(x => `
+<div class="card"><b>${x.nama}</b><p>${x.pesan}</p></div>`).join("");
 }
