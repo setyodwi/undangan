@@ -1,79 +1,225 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Zentih Admin</title>
-<link rel="stylesheet" href="admin.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zentih Admin</title>
+    <link rel="stylesheet" href="admin.css" />
 </head>
+
 <body>
+    <!-- LOGIN -->
+    <div id="loginPage" class="login-screen">
+        <div class="login-card">
+            <div class="brand-mark">💍</div>
+            <h1>Zentih Admin</h1>
+            <p>Kelola tamu, gallery, dan ucapan undangan.</p>
 
-<div id="loginPage" class="login-page">
-  <div class="login-card">
-    <h2>Zentih Admin</h2>
-    <input id="username" placeholder="Username">
-    <input id="password" type="password" placeholder="Password">
-    <button onclick="login()">Masuk</button>
-  </div>
-</div>
+            <div class="form-stack">
+                <input id="username" type="text" placeholder="Username" />
+                <input id="password" type="password" placeholder="Password" />
+                <button id="btnLogin" class="btn btn-primary">Masuk</button>
+            </div>
+        </div>
+    </div>
 
-<div id="app" class="hidden">
-<aside>
-<h2>💍 Zentih</h2>
-<button onclick="openMenu('dashboard')">Dashboard</button>
-<button onclick="openMenu('tamu')">👥 Tamu</button>
-<button onclick="openMenu('gallery')">🖼 Gallery</button>
-<button onclick="openMenu('ucapan')">💌 Ucapan</button>
-</aside>
+    <!-- APP -->
+    <div id="app" class="app hidden">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="brand">
+                    <div class="brand-icon">💍</div>
+                    <div>
+                        <h2>Zentih</h2>
+                        <small>Wedding Admin</small>
+                    </div>
+                </div>
+            </div>
 
-<main>
-<header>
-<h1 id="title">Dashboard</h1>
-<button onclick="logout()">Logout</button>
-</header>
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" data-target="dashboardSection">Dashboard</button>
+                <button class="nav-btn" data-target="tamuSection">Tamu</button>
+                <button class="nav-btn" data-target="gallerySection">Gallery</button>
+                <button class="nav-btn" data-target="ucapanSection">Ucapan</button>
+            </nav>
 
-<section id="dashboard" class="page">
-<div class="cards">
-<div>Total Tamu<h1 id="totalTamu">0</h1></div>
-<div>Ucapan<h1 id="totalUcapan">0</h1></div>
-<div>Gallery<h1 id="totalGallery">0</h1></div>
-</div>
-</section>
+            <div class="sidebar-bottom">
+                <button id="btnLogout" class="btn btn-soft btn-full">Logout</button>
+            </div>
+        </aside>
 
-<section id="tamu" class="page hidden">
-<div class="card">
-<h2>Data Tamu</h2>
-<input id="search" onkeyup="filterTamu()" placeholder="Cari nama / WA">
-<div>
-<input id="nama" placeholder="Nama">
-<input id="wa" placeholder="628xxx">
-<button onclick="addTamu()">Tambah</button>
-</div>
-<table>
-<thead><tr><th>Nama</th><th>WA</th><th>Aksi</th></tr></thead>
-<tbody id="tamuTable"></tbody>
-</table>
-</div>
-</section>
+        <main class="content">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">Dashboard Admin</p>
+                    <h1 id="pageTitle">Dashboard</h1>
+                </div>
+                <div class="topbar-actions">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Online</span>
+                </div>
+            </header>
 
-<section id="gallery" class="page hidden">
-<div class="card">
-<h2>Gallery</h2>
-<input type="file" id="foto" multiple>
-<button onclick="uploadFoto()">Upload</button>
-<div id="galleryGrid" class="grid"></div>
-</div>
-</section>
+            <!-- DASHBOARD -->
+            <section id="dashboardSection" class="section-page">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Tamu</div>
+                        <div class="stat-value" id="statTamu">0</div>
+                        <div class="stat-sub">Seluruh data tamu undangan</div>
+                    </div>
 
-<section id="ucapan" class="page hidden">
-<div class="card">
-<h2>Ucapan</h2>
-<div id="ucapanList"></div>
-</div>
-</section>
+                    <div class="stat-card">
+                        <div class="stat-label">Ucapan</div>
+                        <div class="stat-value" id="statUcapan">0</div>
+                        <div class="stat-sub">Ucapan dari tamu</div>
+                    </div>
 
-</main>
-</div>
-<script src="admin.js"></script>
+                    <div class="stat-card">
+                        <div class="stat-label">Gallery</div>
+                        <div class="stat-value" id="statGallery">0</div>
+                        <div class="stat-sub">Foto di gallery</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Belum Dikirim</div>
+                        <div class="stat-value" id="statBelum">0</div>
+                        <div class="stat-sub">Tamu status belum dikirim</div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <h3>Ringkasan Cepat</h3>
+                            <p class="muted">Gunakan menu samping untuk kelola data undangan.</p>
+                        </div>
+                    </div>
+
+                    <div class="quick-grid">
+                        <button class="quick-card" data-jump="tamuSection">
+                            <span>👥</span>
+                            <strong>Kelola Tamu</strong>
+                            <small>Tambah, edit, hapus, kirim WA</small>
+                        </button>
+                        <button class="quick-card" data-jump="gallerySection">
+                            <span>🖼</span>
+                            <strong>Kelola Gallery</strong>
+                            <small>Upload dan hapus foto</small>
+                        </button>
+                        <button class="quick-card" data-jump="ucapanSection">
+                            <span>💌</span>
+                            <strong>Lihat Ucapan</strong>
+                            <small>Monitoring ucapan tamu</small>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAMU -->
+            <section id="tamuSection" class="section-page hidden">
+                <div class="panel">
+                    <div class="panel-head panel-head-wrap">
+                        <div>
+                            <h3>Data Tamu</h3>
+                            <p class="muted">Cari, tambah, edit, hapus, dan kirim undangan ke WhatsApp.</p>
+                        </div>
+
+                        <div class="panel-tools">
+                            <input id="searchTamu" class="input-search" type="text" placeholder="Cari nama / WA..." />
+                            <button id="btnBulkWA" class="btn btn-soft">Bulk WA</button>
+                            <button id="btnAddGuest" class="btn btn-primary">+ Tambah Tamu</button>
+                        </div>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>WhatsApp</th>
+                                    <th>Link</th>
+                                    <th>Status</th>
+                                    <th class="text-right">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tamuTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GALLERY -->
+            <section id="gallerySection" class="section-page hidden">
+                <div class="panel">
+                    <div class="panel-head panel-head-wrap">
+                        <div>
+                            <h3>Gallery</h3>
+                            <p class="muted">Upload foto dan kelola gallery undangan.</p>
+                        </div>
+
+                        <div class="panel-tools">
+                            <input id="foto" type="file" accept="image/*" multiple />
+                            <button id="btnUploadFoto" class="btn btn-primary">Upload Foto</button>
+                        </div>
+                    </div>
+
+                    <div id="galleryGrid" class="gallery-grid"></div>
+                </div>
+            </section>
+
+            <!-- UCAPAN -->
+            <section id="ucapanSection" class="section-page hidden">
+                <div class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <h3>Ucapan</h3>
+                            <p class="muted">Daftar ucapan yang masuk dari tamu undangan.</p>
+                        </div>
+                    </div>
+
+                    <div id="ucapanList" class="ucapan-list"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODAL TAMU -->
+    <div id="guestModal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-card">
+            <div class="modal-head">
+                <h3 id="guestModalTitle">Tambah Tamu</h3>
+                <button class="icon-btn" id="btnCloseGuestModal">✕</button>
+            </div>
+
+            <input type="hidden" id="guestId" />
+
+            <div class="form-grid">
+                <div class="field">
+                    <label>Nama Tamu</label>
+                    <input id="guestName" type="text" placeholder="Contoh: Bapak Ahmad" />
+                </div>
+
+                <div class="field">
+                    <label>Nomor WhatsApp</label>
+                    <input id="guestWa" type="text" placeholder="628xxxxxxxxxx" />
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button id="btnCancelGuest" class="btn btn-soft">Batal</button>
+                <button id="btnSaveGuest" class="btn btn-primary">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="admin.js"></script>
 </body>
+
 </html>
