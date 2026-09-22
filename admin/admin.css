@@ -1,18 +1,18 @@
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter,Arial;background:#f5f7fb;color:#1f2937}
-aside{position:fixed;width:230px;height:100vh;background:white;padding:25px;border-right:1px solid #eee}
-aside button{display:block;width:100%;margin:10px 0;padding:12px;border:0;background:#f3f4f6;border-radius:10px;text-align:left}
+body{margin:0;font-family:Arial;background:#f5f7fb;color:#222}
+aside{position:fixed;width:230px;height:100vh;background:white;padding:25px;border-right:1px solid #ddd}
+aside button{width:100%;margin:8px 0;padding:12px;text-align:left;border:0;border-radius:10px;background:#f1f1f1}
 main{margin-left:230px;padding:30px}
 header{display:flex;justify-content:space-between}
+.card,.cards div,.login-card{background:white;border-radius:18px;padding:25px;box-shadow:0 5px 20px #0001}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.cards div,.card{background:white;padding:25px;border-radius:18px;box-shadow:0 5px 20px #0001}
-input,button{padding:12px;border-radius:10px;border:1px solid #ddd;margin:5px}
-button{background:#b8954b;color:white;border:0;cursor:pointer}
-table{width:100%;margin-top:20px;border-collapse:collapse}
-td,th{padding:14px;border-bottom:1px solid #eee;text-align:left}
+input,button{padding:11px;border-radius:8px;border:1px solid #ddd;margin:5px}
+button{background:#b8954b;color:white;border:0}
+table{width:100%;border-collapse:collapse;margin-top:20px}
+td,th{padding:12px;border-bottom:1px solid #ddd}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:15px}
-.grid img{width:100%;border-radius:15px}
-.hidden{display:none}
-.login-wrap{display:flex;height:100vh;align-items:center;justify-content:center}
-.login-card{background:white;padding:30px;border-radius:20px}
-@media(max-width:700px){aside{width:100%;height:auto;position:relative}main{margin:0}.cards{grid-template-columns:1fr}}
+.grid img{width:100%;border-radius:12px}
+.hidden{display:none!important}
+.login-page{height:100vh;display:flex;align-items:center;justify-content:center}
+.login-card{width:350px}
+@media(max-width:700px){aside{position:relative;width:100%;height:auto}main{margin:0}.cards{grid-template-columns:1fr}}

@@ -2,29 +2,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Zentih Admin</title>
 <link rel="stylesheet" href="admin.css">
 </head>
 <body>
 
-<div id="loginPage" class="login-wrap">
-<div class="login-card">
-<h2>Zentih Admin</h2>
-<input id="username" placeholder="Username">
-<input id="password" type="password" placeholder="Password">
-<button onclick="login()">Masuk</button>
-</div>
+<div id="loginPage" class="login-page">
+  <div class="login-card">
+    <h2>Zentih Admin</h2>
+    <input id="username" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
+    <button onclick="login()">Masuk</button>
+  </div>
 </div>
 
 <div id="app" class="hidden">
-
 <aside>
 <h2>💍 Zentih</h2>
-<button onclick="menu('dashboard')">Dashboard</button>
-<button onclick="menu('tamu')">👥 Tamu</button>
-<button onclick="menu('gallery')">🖼 Gallery</button>
-<button onclick="menu('ucapan')">💌 Ucapan</button>
+<button onclick="openMenu('dashboard')">Dashboard</button>
+<button onclick="openMenu('tamu')">👥 Tamu</button>
+<button onclick="openMenu('gallery')">🖼 Gallery</button>
+<button onclick="openMenu('ucapan')">💌 Ucapan</button>
 </aside>
 
 <main>
@@ -37,17 +36,19 @@
 <div class="cards">
 <div>Total Tamu<h1 id="totalTamu">0</h1></div>
 <div>Ucapan<h1 id="totalUcapan">0</h1></div>
-<div>Gallery<h1 id="totalFoto">0</h1></div>
+<div>Gallery<h1 id="totalGallery">0</h1></div>
 </div>
 </section>
 
 <section id="tamu" class="page hidden">
 <div class="card">
 <h2>Data Tamu</h2>
-<input id="search" placeholder="Cari nama / WA" onkeyup="filterTamu()">
+<input id="search" onkeyup="filterTamu()" placeholder="Cari nama / WA">
+<div>
 <input id="nama" placeholder="Nama">
-<input id="wa" placeholder="628xxxx">
+<input id="wa" placeholder="628xxx">
 <button onclick="addTamu()">Tambah</button>
+</div>
 <table>
 <thead><tr><th>Nama</th><th>WA</th><th>Aksi</th></tr></thead>
 <tbody id="tamuTable"></tbody>
@@ -73,7 +74,6 @@
 
 </main>
 </div>
-
 <script src="admin.js"></script>
 </body>
 </html>
