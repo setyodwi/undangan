@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Zentih</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div id="login-box" class="box">
+  <h2>Admin Zentih</h2>
+  <input id="username" placeholder="Username">
+  <input id="password" type="password" placeholder="Password">
+  <button onclick="login()">Masuk</button>
+</div>
+
+<div id="dashboard" class="hidden">
+
+<h1>Dashboard Undangan</h1>
+<button onclick="logout()">Logout</button>
+
+<section>
+<h2>Daftar Tamu</h2>
+<button onclick="loadTamu()">Refresh</button>
+<button onclick="bulkWA()">Bulk WA</button>
+<table>
+<thead>
+<tr><th>Nama</th><th>WA</th><th>Aksi</th></tr>
+</thead>
+<tbody id="tamu-list"></tbody>
+</table>
+</section>
+
+<section>
+<h2>Ucapan</h2>
+<button onclick="loadUcapan()">Refresh</button>
+<div id="ucapan-list"></div>
+</section>
+
+<section>
+<h2>Gallery</h2>
+<button onclick="loadGallery()">Refresh</button>
+<div id="gallery-list"></div>
+</section>
+
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>
