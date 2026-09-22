@@ -1,14 +1,14 @@
 body{
-font-family:Arial,sans-serif;
-background:#f7f2ef;
+font-family:Arial;
+background:#f6f1ee;
 padding:20px;
 }
 
 .box,section{
 background:white;
 padding:20px;
+border-radius:15px;
 margin-bottom:20px;
-border-radius:12px;
 }
 
 input,button{
@@ -20,7 +20,7 @@ button{
 cursor:pointer;
 }
 
-.hidden{
+.hide{
 display:none;
 }
 
@@ -35,11 +35,6 @@ padding:8px;
 }
 
 .card{
-padding:12px;
+padding:10px;
 border-bottom:1px solid #ddd;
-}
-
-img{
-margin:5px;
-border-radius:10px;
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,40 +8,50 @@
 </head>
 <body>
 
-<div id="login-box" class="box">
-  <h2>Admin Zentih</h2>
-  <input id="username" placeholder="Username">
-  <input id="password" type="password" placeholder="Password">
-  <button onclick="login()">Masuk</button>
+<div id="login" class="box">
+<h2>Admin Undangan</h2>
+<input id="user" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
+<button onclick="login()">Masuk</button>
 </div>
 
-<div id="dashboard" class="hidden">
+<div id="app" class="hide">
 
 <h1>Dashboard Undangan</h1>
 <button onclick="logout()">Logout</button>
 
 <section>
+<h2>Tambah Tamu</h2>
+<input id="nama" placeholder="Nama tamu">
+<input id="wa" placeholder="Nomor WhatsApp">
+<button onclick="addTamu()">Tambah</button>
+
+<h3>Upload Excel</h3>
+<input type="file" id="excel">
+<button onclick="importExcel()">Import</button>
+</section>
+
+<section>
 <h2>Daftar Tamu</h2>
 <button onclick="loadTamu()">Refresh</button>
-<button onclick="bulkWA()">Bulk WA</button>
 <table>
-<thead>
-<tr><th>Nama</th><th>WA</th><th>Aksi</th></tr>
-</thead>
-<tbody id="tamu-list"></tbody>
+<thead><tr><th>Nama</th><th>WA</th><th>Aksi</th></tr></thead>
+<tbody id="tamu"></tbody>
 </table>
+<button onclick="bulkWA()">Bulk WA</button>
+</section>
+
+<section>
+<h2>Gallery</h2>
+<input type="file" id="foto" multiple>
+<button onclick="uploadFoto()">Upload Foto</button>
+<div id="gallery"></div>
 </section>
 
 <section>
 <h2>Ucapan</h2>
 <button onclick="loadUcapan()">Refresh</button>
-<div id="ucapan-list"></div>
-</section>
-
-<section>
-<h2>Gallery</h2>
-<button onclick="loadGallery()">Refresh</button>
-<div id="gallery-list"></div>
+<div id="ucapan"></div>
 </section>
 
 </div>
