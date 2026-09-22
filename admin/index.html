@@ -1,67 +1,72 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zentih Admin</title>
 <link rel="stylesheet" href="admin.css">
 </head>
 <body>
 
-<div id="loginCard" class="login-card">
+<div id="loginPage" class="login-wrap">
+<div class="login-card">
 <h2>Zentih Admin</h2>
 <input id="username" placeholder="Username">
 <input id="password" type="password" placeholder="Password">
 <button onclick="login()">Masuk</button>
 </div>
+</div>
 
-<div id="dashboard" class="hidden">
+<div id="app" class="hidden">
 
+<aside>
+<h2>💍 Zentih</h2>
+<button onclick="menu('dashboard')">Dashboard</button>
+<button onclick="menu('tamu')">👥 Tamu</button>
+<button onclick="menu('gallery')">🖼 Gallery</button>
+<button onclick="menu('ucapan')">💌 Ucapan</button>
+</aside>
+
+<main>
 <header>
-<h1>Zentih Admin</h1>
+<h1 id="title">Dashboard</h1>
 <button onclick="logout()">Logout</button>
 </header>
 
-<nav>
-<button onclick="showTab('tamu')">👥 Tamu</button>
-<button onclick="showTab('gallery')">🖼 Gallery</button>
-<button onclick="showTab('ucapan')">💌 Ucapan</button>
-</nav>
+<section id="dashboard" class="page">
+<div class="cards">
+<div>Total Tamu<h1 id="totalTamu">0</h1></div>
+<div>Ucapan<h1 id="totalUcapan">0</h1></div>
+<div>Gallery<h1 id="totalFoto">0</h1></div>
+</div>
+</section>
 
-<main>
-
-<section id="tamu" class="tab">
+<section id="tamu" class="page hidden">
 <div class="card">
-<h2>Tambah Tamu</h2>
-<input id="nama" placeholder="Nama tamu">
+<h2>Data Tamu</h2>
+<input id="search" placeholder="Cari nama / WA" onkeyup="filterTamu()">
+<input id="nama" placeholder="Nama">
 <input id="wa" placeholder="628xxxx">
 <button onclick="addTamu()">Tambah</button>
-</div>
-
-<div class="card">
-<h2>Daftar Tamu</h2>
-<button onclick="loadTamu()">Refresh</button>
 <table>
 <thead><tr><th>Nama</th><th>WA</th><th>Aksi</th></tr></thead>
-<tbody id="tamuList"></tbody>
+<tbody id="tamuTable"></tbody>
 </table>
-<button onclick="bulkWA()">Bulk WA</button>
 </div>
 </section>
 
-<section id="gallery" class="tab hidden">
+<section id="gallery" class="page hidden">
 <div class="card">
-<h2>Upload Gallery</h2>
+<h2>Gallery</h2>
 <input type="file" id="foto" multiple>
 <button onclick="uploadFoto()">Upload</button>
+<div id="galleryGrid" class="grid"></div>
 </div>
-<div class="grid" id="galleryList"></div>
 </section>
 
-<section id="ucapan" class="tab hidden">
+<section id="ucapan" class="page hidden">
 <div class="card">
 <h2>Ucapan</h2>
-<button onclick="loadUcapan()">Refresh</button>
 <div id="ucapanList"></div>
 </div>
 </section>
