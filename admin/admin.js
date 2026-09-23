@@ -1,5 +1,5 @@
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbxqy94XwZPjT6jwEHveV0jsBBVMKsaKvHBuL1Ge43k9MXgKHWHmMqtIF2z23_383Xwf-/exec";
+  "https://script.google.com/macros/s/AKfycbwlylfKCaIB7QFyJm9orlnmoXJbRGAdkMXB46D4B80vbNOsPsI5dSL9CKaAa23SDD0v/exec";
 
 
 const ADMIN_USER = "boncel";
